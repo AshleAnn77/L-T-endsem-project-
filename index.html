@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNITE FESTIVAL - The Brightest Music Event</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* CSS Styling (style.css content) */
+        :root {
+            --primary-black: #000000;
+            --secondary-red: #D62828;
+            --accent-gold: #FFD700;
+            --light-gray: #f8f9fa;
+            /* Robotech Font Variables */
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--light-gray);
+            font-family: var(--font-body);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Typography and Accent */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            color: var(--light-gray);
+            text-transform: uppercase;
+        }
+
+        .neon-gold {
+            color: var(--accent-gold) !important;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        /* --- NAVIGATION BAR --- */
+        #main-nav {
+            background-color: rgba(0, 0, 0, 0.95);
+            border-bottom: 2px solid var(--secondary-red);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: var(--light-gray) !important;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: color 0.3s, background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-gold) !important;
+            background-color: rgba(214, 40, 40, 0.1);
+        }
+
+        .ticket-btn {
+            border: 2px solid var(--secondary-red);
+            padding: 5px 15px !important;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .ticket-btn:hover {
+            background-color: var(--secondary-red);
+            color: var(--primary-black) !important;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            min-height: 100vh;
+            /* Placeholder: Use a high-energy black/red image URL or a solid color gradient */
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-section > .container {
+            z-index: 2;
+            position: relative;
+        }
+
+        .display-1 {
+            color: var(--accent-gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(214, 40, 40, 0.5);
+            line-height: 0.8;
+        }
+
+        .cta-btn {
+            background-color: var(--secondary-red);
+            border-color: var(--secondary-red);
+            color: var(--primary-black);
+            font-family: var(--font-heading);
+            font-weight: 900;
+            padding: 15px 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #A31E1E;
+            border-color: #A31E1E;
+            color: var(--light-gray);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(214, 40, 40, 0.5);
+        }
+
+        /* Countdown Timer */
+        #countdown div {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            font-family: var(--font-heading);
+            margin: 0 15px;
+            padding: 10px 20px;
+            border: 2px solid var(--secondary-red);
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            min-width: 120px;
+        }
+
+        #countdown span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--light-gray);
+            margin-top: -5px;
+            font-family: var(--font-body);
+        }
+
+        .divider {
+            height: 50px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--secondary-red),
+                var(--secondary-red) 10px,
+                var(--primary-black) 10px,
+                var(--primary-black) 20px
+            );
+            opacity: 0.8;
+        }
+
+        /* --- LINE-UP SECTION (Netflix-Style) --- */
+        .artist-card {
+            position: relative;
+            overflow: hidden;
+            height: 450px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+        }
+
+        .artist-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(214, 40, 40, 0.7);
+            z-index: 10;
+        }
+
+        .artist-poster, .artist-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.4s;
+        }
+
+        .artist-video {
+            opacity: 0;
+        }
+
+        .artist-card:hover .artist-poster {
+            opacity: 0;
+        }
+
+        .artist-card:hover .artist-video {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+            z-index: 5;
+            color: var(--light-gray);
+        }
+
+        .artist-name {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            font-family: var(--font-heading);
+        }
+
+        .artist-role {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .artist-time {
+            color: var(--secondary-red);
+            font-weight: bold;
+        }
+
+        .view-more {
+            display: block;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* --- MODALS --- */
+        .artist-modal-content, .booking-modal-content {
+            background-color: var(--primary-black);
+            border: 3px solid var(--secondary-red);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(214, 40, 40, 0.5);
+        }
+
+        .btn-close-white {
+            filter: invert(1);
+        }
+
+        /* Booking Form Styling */
+        .form-control, .form-select {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--secondary-red);
+            color: var(--light-gray);
+            font-family: var(--font-body);
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+            color: var(--light-gray);
+        }
+
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-black);
+            border-top: 1px solid rgba(214, 40, 40, 0.3);
+        }
+
+        .social-icon {
+            color: var(--secondary-red);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-icon:hover {
+            color: var(--accent-gold);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top" id="main-nav">
+        <div class="container-fluid">
+            <a class="navbar-brand neon-gold" href="#">🔥 IGNITE FEST</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars neon-gold"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home"><i class="fas fa-home me-1"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#lineup"><i class="fas fa-user-friends me-1"></i> Line-up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#schedule"><i class="fas fa-calendar-alt me-1"></i> Schedule</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i> Contact</a></li>
+                    <li class="nav-item"><a class="nav-link ticket-btn" data-bs-toggle="modal" data-bs-target="#ticketModal"><i class="fas fa-ticket-alt me-1"></i> Book Tickets</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero-section d-flex align-items-center justify-content-center text-center">
+        <div class="container">
+            <h1 class="display-1 text-uppercase fw-bolder">THE **BRIGHTEST** MUSIC **EVENT**</h1>
+            <p class="lead text-uppercase">3 DAYS OF PURE ENERGY, RED HOT SOUNDS, AND NEON LIGHTS</p>
+            <div id="countdown" class="d-flex justify-content-center mt-4">
+                </div>
+            <a href="#lineup" class="btn btn-lg cta-btn mt-5">SEE THE FULL LINE-UP **<i class="fas fa-chevron-down"></i>**</a>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+    
+    <section id="lineup" class="py-5">
+        <div class="container">
+            <h2 class="text-center display-4 mb-5 text-uppercase neon-gold">MEET THE **FIRE** STARTERS</h2>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                
+                <div class="col">
+                    <div class="artist-card" data-artist="vapordrift">
+                        <div class="card-content">
+                            <h5 class="artist-name">VAPOR DRIFT</h5>
+                            <p class="artist-role">Synthwave / Retro DJ</p>
+                            <p class="artist-time">Fri, Nov 8th | **20:00 - 21:00**</p>
+                            <span class="view-more">CLICK FOR FULL BIO **>**</span>
+                        </div>
+                        <video class="artist-video" muted loop preload="none">
+                            <source src="https://videos.pexels.com/video-files/5969562/5969562-hd_1920_1080_25fps.mp4" type="video/mp4">
+                        </video>
+                        <img class="artist-poster" src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Vapor Drift Poster">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="artist-card" data-artist="aurafreq">
+                        <div class="card-content">
+                            <h5 class="artist-name">AURA FREQUENCY</h5>
+                            <p class="artist-role">Experimental Pop / Vocals</p>
+                            <p class="artist-time">Sat, Nov 9th | **22:00 - 23:30**</p>
+                            <span class="view-more">CLICK FOR FULL BIO **>**</span>
+                        </div>
+                        <video class="artist-video" muted loop preload="none">
+                            <source src="https://videos.pexels.com/video-files/1487625/1487625-hd_1920_1080_25fps.mp4" type="video/mp4">
+                        </video>
+                        <img class="artist-poster" src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Aura Frequency Poster">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="artist-card" data-artist="chromaticpulse">
+                        <div class="card-content">
+                            <h5 class="artist-name">CHROMATIC PULSE</h5>
+                            <p class="artist-role">Techno / Hardstyle DJ</p>
+                            <p class="artist-time">Sun, Nov 10th | **01:00 - 02:30**</p>
+                            <span class="view-more">CLICK FOR FULL BIO **>**</span>
+                        </div>
+                        <video class="artist-video" muted loop preload="none">
+                            <source src="https://videos.pexels.com/video-files/2499116/2499116-hd_1920_1080_30fps.mp4" type="video/mp4">
+                        </video>
+                        <img class="artist-poster" src="https://images.pexels.com/photos/2263321/pexels-photo-2263321.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Chromatic Pulse Poster">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="artistModal" tabindex="-1" aria-labelledby="artistModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content artist-modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title neon-gold" id="artistModalLabel"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <div id="artist-details">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn cta-btn" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#ticketModal">BOOK TICKETS NOW **<i class="fas fa-fire"></i>**</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ticketModal" tabindex="-1" aria-labelledby="ticketModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content booking-modal-content">
+                <div class="modal-header text-center border-0">
+                    <h5 class="modal-title w-100 display-6 neon-gold" id="ticketModalLabel">SECURE YOUR **SPOT**</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="lead text-center text-white-50">Fill in your details below and choose your pass. An agent will contact you shortly to finalize your booking.</p>
+                    <form id="bookingForm" class="p-3" novalidate>
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label text-white">Full Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-white">Email Address <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label text-white">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone">
+                        </div>
+                        <div class="mb-4">
+                            <label for="ticketType" class="form-label text-white">Ticket Type <span class="text-danger">*</span></label>
+                            <select class="form-select" id="ticketType" required>
+                                <option value="" disabled selected>Select a Pass</option>
+                                <option value="3day">3-Day Full Pass ($399)</option>
+                                <option value="vip">VIP Backstage Pass ($899)</option>
+                                <option value="friday">Friday Only ($149)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn cta-btn w-100 py-3">COMPLETE RESERVATION **<i class="fas fa-check-circle"></i>**</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section id="schedule" class="py-5 text-center">
+        <h2 class="display-4 mb-3 text-uppercase neon-gold">FULL FESTIVAL SCHEDULE</h2>
+        <p class="lead text-white-50">View all set times and stages in our dedicated festival app - or check the details in each artist's bio!</p>
+    </section>
+
+    <footer id="contact" class="py-4 text-center">
+        <p class="mb-0 text-white-50">© 2025 IGNITE FESTIVAL. All Rights Reserved. | Designed with 🔥 and 🎶</p>
+        <div class="social-icons mt-2">
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+        // JavaScript Interactivity (script.js content)
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. COUNTDOWN TIMER ---
+            const festivalDate = new Date('November 8, 2025 18:00:00').getTime();
+            const countdownElement = document.getElementById('countdown');
+
+            const updateCountdown = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = festivalDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `
+                    <div>${days}<span>DAYS</span></div>
+                    <div>${hours.toString().padStart(2, '0')}<span>HOURS</span></div>
+                    <div>${minutes.toString().padStart(2, '0')}<span>MINUTES</span></div>
+                    <div>${seconds.toString().padStart(2, '0')}<span>SECONDS</span></div>
+                `;
+
+                if (distance < 0) {
+                    clearInterval(updateCountdown);
+                    countdownElement.innerHTML = `<h3 class="neon-gold">The Festival is ON! 🔥</h3>`;
+                }
+            }, 1000);
+
+
+            // --- 2. NETFLIX-STYLE ARTIST HOVER (Video/Image Swap) & MODAL DATA ---
+            const artistCards = document.querySelectorAll('.artist-card');
+
+            const artistData = {
+                'vapordrift': {
+                    name: 'VAPOR DRIFT',
+                    role: 'Synthwave / Retro DJ',
+                    bio: 'A master of vintage analog synthesizers, Vapor Drift transports the audience back to the neon-drenched 80s with heavy basslines and pulsing electronic beats. A must-see set for electro lovers.',
+                    schedule: 'ALPHA STAGE: Friday, November 8th | 20:00 - 21:00',
+                    // Bio image for Vapor Drift
+                    image: 'https://images.pexels.com/photos/2034857/pexels-photo-2034857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' 
+                },
+                'aurafreq': {
+                    name: 'AURA FREQUENCY',
+                    role: 'Experimental Pop / Vocals',
+                    bio: 'Known for her ethereal vocals layered over industrial soundscapes, Aura Frequency delivers a performance that is as visually stunning as it is sonically challenging. Expect high-concept fashion and performance art.',
+                    schedule: 'OMEGA STAGE: Saturday, November 9th | 22:00 - 23:30',
+                    // Bio image for Aura Frequency
+                    image: 'https://images.pexels.com/photos/1587930/pexels-photo-1587930.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+                },
+                'chromaticpulse': {
+                    name: 'CHROMATIC PULSE',
+                    role: 'Techno / Hardstyle DJ',
+                    bio: 'Closing the festival with raw energy, Chromatic Pulse is a relentless force in the Hard Dance scene. Prepare for rapid-fire BPMs, massive drops, and a light show designed to melt circuits.',
+                    schedule: 'MAIN STAGE: Sunday, November 10th | 01:00 - 02:30',
+                    image: 'https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' // This is the bio image, separate from the poster
+                }
+            };
+
+
+            artistCards.forEach(card => {
+                const video = card.querySelector('.artist-video');
+                
+                // Load video metadata when visible
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            video.load(); 
+                        }
+                    });
+                }, { threshold: 0.1 }); 
+                observer.observe(card);
+
+                card.addEventListener('mouseenter', () => {
+                    if (video.readyState >= 3) { 
+                        video.play().catch(error => { console.log('Video play blocked:', error); });
+                    } else {
+                         video.load();
+                         video.play();
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+
+                // Open Modal on Click
+                card.addEventListener('click', () => {
+                    const artistKey = card.getAttribute('data-artist');
+                    const data = artistData[artistKey];
+
+                    if (data) {
+                        document.getElementById('artistModalLabel').textContent = data.name;
+                        document.getElementById('artist-details').innerHTML = `
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <img src="${data.image}" alt="${data.name}" class="img-fluid rounded border border-danger">
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="lead text-white-75">${data.role}</p>
+                                    <p class="text-white-75">${data.bio}</p>
+                                    <h4 class="mt-4 neon-gold">Performance Details</h4>
+                                    <p class="text-white-50"><i class="fas fa-clock me-2"></i> ${data.schedule}</p>
+                                    <p class="text-white-50"><i class="fas fa-map-marker-alt me-2"></i> Ignite Grounds, Sector 42, Nov 8-10</p>
+                                </div>
+                            </div>
+                        `;
+                        
+                        const artistModal = new bootstrap.Modal(document.getElementById('artistModal'));
+                        artistModal.show();
+                    }
+                });
+            });
+
+
+            // --- 3. TICKET BOOKING FORM SUBMISSION ---
+            const bookingForm = document.getElementById('bookingForm');
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!this.checkValidity()) {
+                    this.classList.add('was-validated');
+                    return;
+                }
+
+                const name = document.getElementById('fullName').value;
+                const ticketTypeSelect = document.getElementById('ticketType');
+                const ticketTypeText = ticketTypeSelect.options[ticketTypeSelect.selectedIndex].text;
+
+                alert(`Thank you, ${name}! Your reservation for the ${ticketTypeText} has been received. A confirmation will be sent to your email shortly.`);
+
+                const ticketModal = bootstrap.Modal.getInstance(document.getElementById('ticketModal'));
+                if (ticketModal) {
+                    ticketModal.hide();
+                }
+                this.reset();
+                this.classList.remove('was-validated');
+            });
+
+        });
+    </script>
+</body>
+</html>
